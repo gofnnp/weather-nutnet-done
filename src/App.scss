@@ -8,6 +8,20 @@
   src: url('./fonts/SFProDisplay-Regular.ttf'); /* Путь к файлу со шрифтом */
 }
 
+@font-face {
+  font-family: SF Pro Med; /* Имя шрифта */
+  src: url('./fonts/SFProDisplay-Medium.ttf'); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: SF Pro Display Semibold; /* Имя шрифта */
+  src: url('./fonts/SFProDisplay-Semibold.ttf'); /* Путь к файлу со шрифтом */
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
 
 .header {
   &__body {
@@ -16,6 +30,7 @@
       background: #2A2F45;
       padding-left: 23px;
       display: flex;
+      position: absolute;
   }
   &__title {
       font-family: SF Pro Display;
@@ -31,8 +46,8 @@
 
 .Home {
   background: #161B30;
-  min-height: calc(100vh - 65px);
-  padding-top: 80px;
+  min-height: 100vh;
+  padding-top: 145px;
   &__text-container {
     width: 170px;
     margin-top: 43px;
@@ -83,13 +98,33 @@
     font-size: 16px;
     line-height: 19px;
     color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  &__input-result {
+    width: 510px;
+    height: 59px;
+    background: #30354B;
+    border-radius: 0 0 6px 6px;
+    position: absolute;
+    z-index: 0;
+    margin-top: -3px;
+    padding: 20px 0 20px 20px;
+    font-family: SF Pro Regular;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8a91ab;
+    cursor: pointer;
+  }
+  &__input-mark {
+    color: #fff;
   }
   &__cards-container {
-    width: 872px;
+    width: 75.7%;
     margin: 0 auto;
     padding-top: 55px;
-    // display: flex;
-    // flex-wrap: wrap;
   }
   &__card-container {
     width: 270px;
@@ -166,8 +201,8 @@
 
 .Weather {
   background: radial-gradient(80.36% 80.36% at 50% 0%, #5A607C 0%, #161B30 100%);
-  height: calc(100vh - 65px);
-  padding-top: 24px;
+  height: 100vh;
+  padding-top: 89px;
   &__nav-container {
     height: 24px;
     margin: 0 34px;
@@ -190,7 +225,7 @@
     color: #8A91AB;
   }
   &__title {
-    font-family: SF Pro Display;
+    font-family: SF Pro Med;
     font-style: normal;
     font-weight: 500;
     font-size: 56px;
@@ -202,7 +237,7 @@
   &__description {
     margin-top: 16px;
     text-align: center;
-    font-family: SF Pro Display;
+    font-family: SF Pro Regular;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -239,7 +274,7 @@
     justify-content: space-between;
   }
   &__pressure-text {
-    font-family: SF Pro Display;
+    font-family: SF Pro Regular;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -247,7 +282,7 @@
     color: #FFFFFF;
   }
   &__sunset {
-    font-family: SF Pro Display;
+    font-family: SF Pro Regular;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -255,5 +290,97 @@
     color: #8A91AB;
     text-align: center;
     margin-top: 32px;
+  }
+  &__bookmark {
+    cursor: pointer;
+  }
+  &__icon {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .header {
+    &__body {
+      background: none;
+    }
+  }
+  .Home {
+    padding-top: 85px;
+    &__input-container {
+      width: 89.3334%;
+    }
+    &__input-result {
+      width: 89.3334%;
+    }
+    &__cards-container {
+      width: 89.3334%;
+      padding-top: 33px;
+    }
+    &__cards-substrate {
+      margin-left: -19px;
+      width: fit-content;
+    }
+    &__card-container {
+      margin-left: 19px;
+      width: 158px;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .header {
+    &__body {
+      &_deactive {
+        display: none;
+      }
+    }
+  }
+  .Home {
+    &__cards-substrate {
+      align-items: center;
+    }
+  }
+  .Weather {
+    background: linear-gradient(180deg, #5A607C 0%, #161B30 49.93%);
+    padding-top: 22px;
+    &__nav-container {
+      margin: 0 20px;
+    }
+    &__back-text {
+      display: none;
+    }
+    &__title {
+      margin-top: 48px;
+      font-size: 24px;
+      line-height: 110.7%;
+    }
+    &__description {
+      font-size: 14px;
+      line-height: 110.7%;
+    }
+    &__temp-container {
+      flex-direction: column;
+      height: auto;
+    }
+    &__temp {
+      font-size: 120px;
+      margin-left: 0;
+    }
+    &__pressure-container {
+      width: 117px;
+      margin-top: 40px;
+    }
+    &__pressure-text {
+      font-size: 14px;
+      line-height: 17px;
+      text-shadow: -1.39839px 2.09758px 0.699193px rgba(0, 0, 0, 0.1);
+    }
+    &__sunset {
+      font-size: 14px;
+      line-height: 110.7%;
+      margin-top: 40px;
+    }
   }
 }

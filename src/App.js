@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import './nullstyle.scss';
-import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import WeatherPage from './pages/WeatherPage';
 import Header from './components/Header';
 import { ContextWeather } from './context/contextWeather';
+import './nullstyle.scss';
+import './App.scss';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [stateBookmark, setStateBookmark] = useState(true);
+  const [activeHeader, setActiveHeader] = useState(false);
 
   const handleChangeWeather = (val) => {
     setWeatherData(val);
@@ -20,14 +21,19 @@ function App() {
   const handleDefaultBookmark = (value) => {
     setStateBookmark(value);
   }
+  const handleHeaderActive = (value) => {
+    setActiveHeader(value);
+  }
   return (
     <ContextWeather.Provider
       value={{
         weatherData,
         stateBookmark,
+        activeHeader,
         onChangeWeather: handleChangeWeather,
         onChangeBookmark: handleChangeBookmark,
-        onDefaultBookmark: handleDefaultBookmark
+        onDefaultBookmark: handleDefaultBookmark,
+        onChangeHeaderActive: handleHeaderActive,
       }}
     >
       <Switch>

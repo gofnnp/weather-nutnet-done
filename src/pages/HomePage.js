@@ -6,48 +6,81 @@ import { ContextWeather } from '../context/contextWeather';
 import database from '../service/firebase.js';
 import FavoriteCard from '../components/FavoriteCard';
 import weatherApi from '../common/weatherApi';
+import cityApi from '../common/cityApi';
 
 function HomePage() {
     const [query, setQuery] = useState('');
-    const [favoritesCity, setFavoritesCity] = useState({})
+    const [queryResult, setQueryResult] = useState('');
+    const [favoritesCity, setFavoritesCity] = useState({});
     const history = useHistory();
     const weatherContext = useContext(ContextWeather);
 
     useEffect(() => {
+        weatherContext.onChangeHeaderActive(false);
+    });
+
+    useEffect(() => {
+        let cleanupFunction = false;
         database.ref('favorites').on('value', (snapshot) => {
-            setFavoritesCity(snapshot.val());
+            if(!cleanupFunction) setFavoritesCity(snapshot.val());
         });
+        return () => cleanupFunction = true;
     }, []);
 
     const search = e => {
-        if (e.key === 'Enter') {
-            history.push("/weather");
-            fetch(`${weatherApi.base}weather?q=${query}&units=metric&lang=ru&APPID=${weatherApi.key}`)
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    weatherContext.onChangeWeather(data);
-                    if (!favoritesCity) {
-                        weatherContext.onDefaultBookmark(true);
-                    } else {
-                        weatherContext.onDefaultBookmark(!Object.keys(favoritesCity).some(v => v === data.name));
-                    }
-                });
-        }
+        e.preventDefault();
+        fetch(`${weatherApi.base}weather?q=${queryResult}&units=metric&lang=ru&APPID=${weatherApi.key}`)
+            .then(res => res.json())
+            .then(data => {
+                weatherContext.onChangeWeather(data);
+                if (!favoritesCity) {
+                    weatherContext.onDefaultBookmark(true);
+                } else {
+                    weatherContext.onDefaultBookmark(!Object.keys(favoritesCity).some(v => v === data.name));
+                }
+            })
+            .catch(error => console.log("error", error));
+        history.push("/weather");
     }
 
+    const options = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Token " + cityApi.token
+        },
+        body: JSON.stringify({query: query})
+    }
+
+    if (query.length > 2) {
+        fetch(cityApi.url, options)
+            .then(response => response.json())
+            .then(result => setQueryResult(result.suggestions[0].value.split(" ")[1]))
+            .catch(error => console.log("error", error));
+    }
 
     return (
         <div className="Home">
             <div className="Home__input-container">
                 <input
                     className="Home__input"
+                    spellcheck="false"
                     type="text"
                     placeholder="Укажите город"
-                    onChange={e => setQuery(e.target.value)}
+                    onChange={e => {setQuery(e.target.value); setQueryResult('')}}
                     value={ query }
-                    onKeyPress={search}
                 />
+                {queryResult !== '' && (
+                    <div
+                        className="Home__input-result"
+                        onClick={search}
+                    >
+                        <span className="Home__input-mark">{query}</span>
+                        {queryResult.substring(query.length)}
+                    </div>
+                )}
             </div>
             {favoritesCity
             ?
