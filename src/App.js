@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './nullstyle.scss';
+import './App.scss';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import WeatherPage from './pages/WeatherPage';
+import Header from './components/Header';
+import { ContextWeather } from './context/contextWeather';
 
 function App() {
+  const [weatherData, setWeatherData] = useState(null);
+  const [stateBookmark, setStateBookmark] = useState(true);
+
+  const handleChangeWeather = (val) => {
+    setWeatherData(val);
+  }
+  const handleChangeBookmark = () => {
+    setStateBookmark(prevState => !prevState);
+  }
+  const handleDefaultBookmark = (value) => {
+    setStateBookmark(value);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextWeather.Provider
+      value={{
+        weatherData,
+        stateBookmark,
+        onChangeWeather: handleChangeWeather,
+        onChangeBookmark: handleChangeBookmark,
+        onDefaultBookmark: handleDefaultBookmark
+      }}
+    >
+      <Switch>
+        <Route>
+          <>
+            <Header />
+            <Switch>
+              <Route path="/" exact component={HomePage} />
+              <Route path="/home" component={HomePage} />
+              <Route path="/weather" component={WeatherPage} />
+            </Switch>
+          </>
+        </Route>
+      </Switch>
+    </ContextWeather.Provider>
   );
 }
 

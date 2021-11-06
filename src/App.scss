@@ -1,0 +1,259 @@
+@font-face {
+  font-family: SF Pro Display; /* Имя шрифта */
+  src: url('./fonts/SFProDisplay-Bold.ttf'); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: SF Pro Regular; /* Имя шрифта */
+  src: url('./fonts/SFProDisplay-Regular.ttf'); /* Путь к файлу со шрифтом */
+}
+
+
+.header {
+  &__body {
+      width: 100vw;
+      height: 65px;
+      background: #2A2F45;
+      padding-left: 23px;
+      display: flex;
+  }
+  &__title {
+      font-family: SF Pro Display;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 19px;
+      color: #FFFFFF;
+      margin-top: 23px;
+      margin-left: -25px;
+  }
+}
+
+.Home {
+  background: #161B30;
+  min-height: calc(100vh - 65px);
+  padding-top: 80px;
+  &__text-container {
+    width: 170px;
+    margin-top: 43px;
+    text-align: center;
+  }
+  &__text {
+    font-family: SF Pro Regular;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8A91AB;
+  }
+  &__text_city {
+    color: #fff;
+    border-bottom: 1px dashed #fff;
+  }
+  &__bookmarks-container {
+    width: 244px;
+    margin: 88px auto 0 auto;
+  }
+  &__flex-container {
+    display: flex;
+    margin: 0 auto;
+    width: 212px;
+  }
+  &__arrow {
+    margin: 26px 4px 0 -21px;
+  }
+  &__bookmark {
+    margin: 23.33px auto 0 auto;
+    width: 23.33px;
+  }
+  &__input-container {
+    width: 510px;
+    height: 56px;
+    margin: 0 auto;
+  }
+  &__input {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+    background: #2A2F45;
+    border-radius: 2px;
+    font-family: SF Pro Regular;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #fff;
+  }
+  &__cards-container {
+    width: 872px;
+    margin: 0 auto;
+    padding-top: 55px;
+    // display: flex;
+    // flex-wrap: wrap;
+  }
+  &__card-container {
+    width: 270px;
+    height: 190px;
+    background: #1f253a;
+    border-radius: 6px;
+    padding-top: 23px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-left: 35px;
+  }
+  &__card-text {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 110.7%;
+    opacity: 1;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  &__card-temp {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 110.7%;
+    margin-top: 12px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  &__cards-substrate {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 43px);
+    margin-left: -35px;
+  }
+}
+
+::-webkit-input-placeholder {
+  font-family: SF Pro Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #8A91AB;
+}
+::-moz-placeholder {
+  font-family: SF Pro Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #8A91AB;
+}/* Firefox 19+ */
+:-moz-placeholder {
+  font-family: SF Pro Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #8A91AB;
+}/* Firefox 18- */
+:-ms-input-placeholder {
+  font-family: SF Pro Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #8A91AB;
+}
+
+.Weather {
+  background: radial-gradient(80.36% 80.36% at 50% 0%, #5A607C 0%, #161B30 100%);
+  height: calc(100vh - 65px);
+  padding-top: 24px;
+  &__nav-container {
+    height: 24px;
+    margin: 0 34px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__back-container {
+    width: 81px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__back-text {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 110.7%;
+    color: #8A91AB;
+  }
+  &__title {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 110.7%;
+    color: #FFFFFF;
+    margin-top: 31px;
+    text-align: center;
+  }
+  &__description {
+    margin-top: 16px;
+    text-align: center;
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 110.7%;
+    color: #FFFFFF;
+  }
+  &__description::first-letter {
+    text-transform: uppercase;
+  }
+  &__temp-container {
+    margin: 36px auto 0 auto;
+    display: flex;
+    align-items: center;
+    height: 150px;
+    width: fit-content;
+  }
+  &__temp {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 129.755px;
+    line-height: 110.7%;
+    background: linear-gradient(#FFFFFF, #ffffff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: -11px;
+  }
+  &__pressure-container {
+    height: 24px;
+    width: 129px;
+    margin: 66px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__pressure-text {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+  }
+  &__sunset {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 110.7%;
+    color: #8A91AB;
+    text-align: center;
+    margin-top: 32px;
+  }
+}
