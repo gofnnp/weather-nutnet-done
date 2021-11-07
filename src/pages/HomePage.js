@@ -78,7 +78,7 @@ function HomePage() {
                         onClick={search}
                     >
                         <span className="Home__input-mark">{query}</span>
-                        {queryResult.substring(query.length)}
+                        {queryResult.substring(query.length).replace(/[^a-zа-яё]/gi, '')}
                     </div>
                 )}
             </div>
