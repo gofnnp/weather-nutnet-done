@@ -21,25 +21,15 @@ function WeatherPage() {
         weatherContext.onChangeHeaderActive(true);
     });
 
-    function convertTimestamp(timestampSunSet, timestampSunRise) {
-        let timestamp;
-        let sunType;
-        if ((Date.now() / 1000) > timestampSunSet) {
-            sunType = 'Рассвет';
-            timestamp = timestampSunRise;
-        } else {
-            sunType = 'Закат';
-            timestamp = timestampSunSet;
-        }
-        let d = new Date(timestamp * 1000),
+    function convertTimestamp(timestampSunSet, timezone) {
+        let timestamp = timestampSunSet;
+        let d = new Date((timestamp - 14400 + timezone) * 1000),
             hh = d.getHours(),
             min = ('0' + d.getMinutes()).slice(-2),
             time;
-
         time = hh + ':' + min;
         return {
-            time,
-            sunType
+            time
         };
     }
 
@@ -88,7 +78,7 @@ function WeatherPage() {
                         <p className="Weather__pressure-text">{Math.round(weatherData.main.pressure / 1.333)} мм рт. ст.</p>
                     </div>
                     <p className="Weather__sunset">
-                        {convertTimestamp(weatherData.sys.sunset, weatherData.sys.sunrise).sunType} в {convertTimestamp(weatherData.sys.sunset, weatherData.sys.sunrise).time}
+                        Закат в {convertTimestamp(weatherData.sys.sunset, weatherData.timezone).time}
                     </p>
                 </>
             ) :

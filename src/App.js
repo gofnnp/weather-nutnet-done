@@ -1,11 +1,11 @@
+import './nullstyle.scss';
+import './App.scss';
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import WeatherPage from './pages/WeatherPage';
 import Header from './components/Header';
 import { ContextWeather } from './context/contextWeather';
-import './nullstyle.scss';
-import './App.scss';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);

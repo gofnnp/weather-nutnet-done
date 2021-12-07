@@ -49,15 +49,26 @@ function HomePage() {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": "Token " + cityApi.token
+            "Authorization": "Token " + cityApi.token,
         },
-        body: JSON.stringify({query: query})
+        body: JSON.stringify({
+            query: query,
+            "from_bound": { "value": "city" },
+            "to_bound": { "value": "city" },
+            "locations": [
+                {
+                    "country": "*"
+                }
+            ]
+        })
     }
 
     if (query.length > 2) {
         fetch(cityApi.url, options)
             .then(response => response.json())
-            .then(result => setQueryResult(result.suggestions[0].value.split(" ")[1]))
+            .then(result => {
+                setQueryResult(result.suggestions[0].data.city)
+            })
             .catch(error => console.log("error", error));
     }
 
@@ -77,8 +88,8 @@ function HomePage() {
                         className="Home__input-result"
                         onClick={search}
                     >
-                        <span className="Home__input-mark">{query}</span>
-                        {queryResult.substring(query.length).replace(/[^a-zа-яё]/gi, '')}
+                        <span className="Home__input-mark">{queryResult.substring(0, query.length)}</span>
+                        {queryResult.substring(query.length)}
                     </div>
                 )}
             </div>
@@ -86,16 +97,16 @@ function HomePage() {
             ?
                 (
                     <div className="Home__cards-container">
-                        <div className="Home__cards-substrate">
-                            {
-                                Object.entries(favoritesCity).map(([key, res]) => (
+                        {
+                            Object.entries(favoritesCity).map(([key, res]) => {
+                                return (
                                     <FavoriteCard
                                         key={key}
                                         value={res}
                                     />
-                                ))
-                            }
-                        </div>
+                                )
+                            })
+                        }
                     </div>
                 )
             : 
